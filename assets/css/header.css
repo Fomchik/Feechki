@@ -1,0 +1,151 @@
+/* Стили для шапки сайта (header) */
+.site-header {
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(60, 60, 100, 0.04);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding: 0 80px;
+    height: 80px;
+}
+
+.logo-flex {
+    display: flex;
+    align-items: center;
+}
+.logo-img {
+    margin-right: 16px;
+    height: 40px;
+    width: auto;
+}
+
+.logo-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.logo-text {
+    font-weight: bold;
+    color: #7C4DFF;
+    font-size: 1.2rem;
+}
+.logo-desc {
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: -2px;
+}
+
+/* Центрирование меню */
+.main-nav {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-list {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+}
+
+.nav-item a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    font-size: 1.25rem;
+    transition: color 0.2s;
+}
+
+.nav-item.active a,
+.nav-item a:hover {
+    color: #7C4DFF;
+}
+
+.user-icon {
+    width: 24px;
+    display: flex;
+    align-items: center;
+}
+
+/* Кнопка-бургер для мобильного меню */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    gap: 5px;
+    padding: 0;
+}
+.nav-toggle span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background: #7C4DFF;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+/* Адаптивность */
+@media (max-width: 900px) {
+    .header-container {
+        padding: 0 12px;
+    }
+    .nav-list {
+        gap: 12px;
+    }
+}
+@media (max-width: 700px) {
+    .header-container {
+        height: 56px;
+    }
+    .logo-text {
+        font-size: 1rem;
+    }
+    .logo-desc {
+        font-size: 0.7rem;
+    }
+    .user-icon {
+        margin-left: 12px;
+    }
+    .nav-toggle {
+        display: flex;
+    }
+    .nav-list {
+        position: absolute;
+        top: 56px;
+        right: 0;
+        background: #fff;
+        flex-direction: column;
+        width: 180px;
+        box-shadow: 0 4px 16px rgba(60,60,100,0.08);
+        padding: 16px 0;
+        gap: 0;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-10px);
+        transition: 0.3s;
+    }
+    .nav-list.open {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+    .nav-item {
+        padding: 10px 24px;
+    }
+} 
