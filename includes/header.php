@@ -47,9 +47,9 @@ function isActive($page) {
             </button>
             <ul class="nav-list">
                 <li class="nav-item <?php echo isActive('index.php'); ?>"><a href="/index.php">Главная</a></li>
-                <li class="nav-item <?php echo isActive('about.php'); ?>"><a href="/about.php">О нас</a></li>
+                <li class="nav-item <?php echo isActive('reviews.php'); ?>"><a href="/reviews.php">Отзывы</a></li>
                 <li class="nav-item <?php echo isActive('services.php'); ?>"><a href="/services.php">Услуги</a></li>
-                <li class="nav-item <?php echo isActive('signup.php'); ?>"><a href="/signup.php">Записаться</a></li>
+                <li class="nav-item <?php echo isActive('about.php'); ?>"><a href="/about.php">О нас</a></li>
                 <li class="nav-item <?php echo isActive('contacts.php'); ?>"><a href="/contacts.php">Контакты</a></li>
                   <!-- Иконка пользователя -->
                   <li class="nav-item avatar">
@@ -86,95 +86,11 @@ function isActive($page) {
                   </li>
             </ul>
         </nav>
+                <div>
+                <li class="nav-item <?php echo isActive('signup.php'); ?>"><a href="/signup.php" class="btn primary-nav"><img src="/assets/icons/calendar.svg" alt="Календарь"> Записаться на прием</a></li>
+                </div>
     </div>
 </header>
 
 <!-- Подключение скрипта для header (бургер-меню) -->
 <script src="/assets/js/header.js"></script>
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-<!-- Мольное окно -->
- <div id="loginModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2>Вход</h2>
-            <span class="close">&times;</span>
-        </div>
-        <div class="modal-body">
-            <form id= "loginForm" method="post" action="includes/auth_handler.php">
-                <input type='hidden' name='action' value='login'>
-                <div class="form-group">
-                    <label for="login">Ваш email или логин</label>
-                    <input type="text" id="login" name="login" required>
-                </div>
-                <div class='form-group'>
-                     <label for="login_password">Ваш пароль</label>
-                     <input type="password" id="login_password" name="password" required>
-                </div>
-                <div class="form-group remember-me">
-                    <input type="checkbox" id="remember" name="remember" value="1">
-                    <label for="remember">Запомнить меня</label>
-                </div>
-                <div class="form-actions">
-                    <button type="submit" class="btn primary">Войти</button>
-                </div>
-                <div class="form-footer">
-                    <p>
-                        Не зарегистрированы? 
-                        <a href="#" id="showRegisterModal">Зарегистрироваться</a>
-                    </p>
-                </div>
-            </form>
-        </div>
-    </div>
- </div>
- <!-- Мольное окно регистрации -->
-  <div id="registerModal" class="modal">
-    <div class="modal-content">
-         <div class="modal-header">
-            <h2>Регистрация</h2>
-            <span class="close">&times;</span>
-        </div>
-        <div class="modal-body">
-            <form id="registerForm" method="post" action="auth_handler.php">
-                <input type="hidden" name="action" value="register">
-        <div class="form-group">
-            <label for="username">Ваш логин</label>
-            <input type="text" id="username" name="username" required>
-        </div>
-         <div class="form-group">
-                    <label for="email">Ваш email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                                <div class="form-group">
-                    <label for="register_password">Ваш пароль</label>
-                    <input type="password" id="register_password" name="password" required>
-                </div>
-                 <div class="form-group">
-                    <label for="confirm_password">Повторите пароль</label>
-                    <input type="password" id="confirm_password" name="confirm_password" required>
-                </div>
-                                <div class="form-actions">
-                    <button type="submit" class="btn primary">Регистрация</button>
-                </div>
-                  <div class="form-footer">
-                    <p>
-                        Вы уже зарегистрированы? 
-                        <a href="#" id="showLoginModal">Тогда войдите</a>
-                    </p>
-                </div>
-            </form>
-        </div>
-    </div>
-    <script src="/assets/js/auth_modal.js"></script>
-</body>
-</html>

@@ -1,0 +1,229 @@
+html, body {
+    overflow-x: hidden;
+}
+
+.main-footer {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    background-color: #5F6980;
+    color: #ffffff;
+    margin-top: 60px;
+}
+
+.footer-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 40px 80px;
+}
+
+/* Колонки в футере */
+.footer-column {
+    flex: 1;
+    width: auto;
+}
+
+.brand-column {
+    flex: 1;
+     width: auto;
+}
+
+.contacts-column {
+    flex: 1;
+     width: auto;
+}
+
+.nav-column {
+    flex: 1;
+     width: auto;
+}
+
+/* Логотип и название */
+.footer-logo {
+    display: flex;
+    align-items: center;
+}
+.footer-logo img {
+    margin-right: 16px;
+    height: 40px;
+    width: auto;
+    filter: brightness(0) invert(1);
+}
+
+.footer-logo-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+footer .logo-text {
+    font-weight: bold;
+    color: #fff;
+    font-size: 1.2rem;
+}
+footer .logo-desc {
+    font-size: 0.8rem;
+    color: #fff;
+    margin-top: -2px;
+}
+
+.footer-description {
+    font-size: 1.25rem;
+    line-height: 1.5;
+    margin-top: 0;
+    width: 100%;
+    color: #FFFFFF;
+}
+
+/* Заголовки для колонок */
+.footer-column h3 {
+    color: #fff;
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+/* Контактная информация */
+.footer-contact-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.footer-icon {
+    margin-right: 15px;
+    width: 20px;
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+
+.footer-icon img {
+    width: 100%;
+    height: auto;
+}
+
+.footer-contact-item p {
+    margin: 0;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+.footer-contact-item a {
+    color: #fff;
+    text-decoration: none;
+    transition: opacity 0.3s;
+} 
+
+.footer-contact-item a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+/* Навигация */
+.footer-navigation {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-gap: 10px 20px;
+}
+
+.footer-navigation li {
+    margin-bottom: 10px;
+}
+
+.footer-navigation a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: opacity 0.3s;
+    display: block;
+}
+
+.footer-navigation a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+/* Нижняя часть футера */
+.footer-bottom {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.footer-bottom .footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s;
+}
+
+.social-links a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.social-links img {
+    width: 18px;
+    height: 18px;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 992px) {
+    .footer-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .footer-column {
+        width: 100%;
+    }
+    
+    .footer-navigation {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-navigation {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .footer-bottom .footer-container {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .copyright {
+        order: 2;
+    }
+    
+    .social-links {
+        order: 1;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-navigation {
+        grid-template-columns: 1fr;
+    }
+}

@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 const formData = new FormData(form);
                 
-                fetch('auth_handler.php', {
+                fetch('includes/auth_handler.php', {
                     method: 'POST',
                     body: formData,
                     headers: {
@@ -98,7 +98,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 })
                 .catch(error => {
                     console.error('Ошибка:', error);
-                    alert('Произошла ошибка при отправке запроса');
                 });
             });
         }

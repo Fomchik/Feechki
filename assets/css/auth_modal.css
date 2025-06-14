@@ -119,11 +119,18 @@
 }
 
 .form-footer {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: 24px;
     color: #666;
     font-size: 1.05rem;
 }
+
+.form-footer p {
+    font-size: 20px;
+}
+
 
 .form-footer a {
     color: #7C3AED;
@@ -140,7 +147,7 @@
 
 .avatar {
     display: flex;
-    margin-top: -5;
+    margin-top: -5px;
 }
 
 .avatar-circle {

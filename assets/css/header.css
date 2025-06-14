@@ -57,6 +57,11 @@
     margin: 0;
     padding: 0;
     justify-content: center;
+
+}
+
+.nav-item {
+    list-style: none;
 }
 
 .nav-item a {
@@ -65,6 +70,7 @@
     font-weight: 500;
     font-size: 1.25rem;
     transition: color 0.2s;
+     height: 40px;
 }
 
 .nav-item.active a,
@@ -77,6 +83,20 @@
     display: flex;
     align-items: center;
 }
+
+.primary-nav {
+    display: flex;
+    color: #fff !important;
+    background-color: #7C4DFF;
+    border-radius: 8px;
+    padding: 10px 20px;
+    gap: 10px;
+}
+
+.primary-nav:hover {
+    transform: scaleY(1.05);
+}
+
 
 /* Кнопка-бургер для мобильного меню */
 .nav-toggle {
@@ -149,3 +169,4 @@
         padding: 10px 24px;
     }
 } 
+
