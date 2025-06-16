@@ -1,0 +1,371 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+main {
+  padding: 0 80px;
+}
+
+.section-mission {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.mission-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.mission-text h2 {
+  font-size: 3rem;
+  font-weight: 500;
+  color: #553c9a;
+}
+
+.mission-text p {
+  font-size: 2.25rem;
+  color: #2d3748;
+}
+
+.mission-text ul {
+  font-size: 1.25rem;
+  color: #2d3748;
+  margin: 20px 20px;
+}
+
+.mission-text li::marker {
+  color: #7c3aed;
+}
+
+.section-mission img {
+  width: 115px;
+  height: auto;
+  margin: 0 20px;
+}
+
+/*Подход*/
+.section-approach {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.container-approach {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 20px;
+}
+
+.approach-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.circle {
+  display: flex;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: rgb(124, 58, 237, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.circle img {
+  width: 75px;
+  height: auto;
+}
+
+.approach-item p {
+  font-size: 1.25rem;
+  color: #553c9a;
+}
+
+/* Команда */
+.section-team {
+  margin-top: 60px;
+}
+
+.header-team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.header-team img {
+  position: absolute;
+  width: 115px;
+  height: auto;
+  bottom: -60px;
+  right: 15%;
+  z-index: -1;
+}
+
+.team-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.team-text h2 {
+  font-size: 3rem;
+  font-weight: 500;
+  color: #553c9a;
+}
+
+.team-text p {
+  font-size: 2.25rem;
+  color: #2d3748;
+}
+
+.container-team {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 20px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.container-team img {
+  min-height: 440px;
+  max-width: 400px;
+  width: 100%;
+  border-radius: 8px;
+}
+
+.container-team .name {
+  font-size: 1.25rem;
+  color: #553c9a;
+  margin-top: 10px;
+}
+
+.container-team .position {
+  font-size: 1.125rem;
+  color: #2d3748;
+  margin-top: 10px;
+}
+
+/* Контакты */
+.section-contacts {
+  margin-top: 60px;
+}
+
+.header-contacts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.header-contacts img {
+  position: absolute;
+  width: 115px;
+  height: auto;
+  bottom: -75px;
+  right: 7%;
+  z-index: -1;
+}
+
+.contacts-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.contacts-text h2 {
+  font-size: 3rem;
+  font-weight: 500;
+  color: #553c9a;
+}
+
+.contacts-text p {
+  font-size: 2.25rem;
+  color: #2d3748;
+}
+
+.contacts-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: auto auto auto;
+  grid-template-areas:
+    "our-contacts map"
+    "our-contacts map"
+    "works-hour   map";
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  margin-top: 20px;
+ 
+}
+
+.contacts-card {
+  background-color: #ffffff;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.our-contacts {
+  grid-area: our-contacts;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.contact-item:last-child {
+  margin-bottom: 0;
+}
+
+.icon-container {
+  flex: 0 0 24px;
+  margin-right: 16px;
+  margin-top: 4px;
+}
+
+.icon-container img {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.contact-item p,
+.contact-item a {
+  font-size: 1.125rem;
+  color: #2e2e3e;
+  margin: 0;
+}
+
+.contact-item a {
+  color: #7c3aed;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.contact-item a:hover {
+  color: #4c1d95;
+}
+
+.map {
+  grid-area: map;
+  padding: 0;
+  display: flex;
+}
+
+.map iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  border: none;
+  border-radius: 16px;
+  display: block;
+}
+
+.works-hour {
+  grid-area: works-hour;
+}
+
+.schedule-item .time:last-child {
+  margin-bottom: 0;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; 
+    margin-top: 20px; 
+}
+
+.button-container .button { 
+    font-size: 1.125rem;
+    background-color: #7c3aed;
+    border-radius: 8px;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+    width: 220px;
+    text-align: center; 
+}
+
+.button-container .button:hover {
+    transform: scaleY(1.05);
+}
+
+/* Адаптивность */
+
+@media (max-width: 768px) {
+    main {
+        padding: 0 20px; 
+    }
+    .section-mission {
+        flex-direction: column; 
+        text-align: center;
+    }
+     .section-mission img {
+        margin: 0 0 20px 0;
+    }
+        .container-approach {
+        flex-direction: column;
+    }
+        .header-team img {
+        right: 0; 
+        bottom: -40px;
+        position: relative;
+    }
+    .container-team {
+        flex-direction: column; 
+    }
+
+    .container-team img {
+        max-width: 100%; 
+    }
+
+    .contacts-wrapper {
+        grid-template-columns: 1fr; 
+        grid-template-areas:
+            "our-contacts"
+            "works-hour"
+            "map";
+    }
+}
+
+@media (min-width: 1441px) {
+    main {
+        padding: 0 120px;
+    }
+    .mission-text h2,
+    .team-text h2,
+    .contacts-text h2 {
+        font-size: 4rem;
+    }
+    .container-team {
+        max-width: 1600px; 
+    }
+
+     .container-team img {
+        max-width: 500px;
+    }
+    .contacts-wrapper {
+        max-width: 1600px;
+    }
+}

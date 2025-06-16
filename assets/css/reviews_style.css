@@ -56,7 +56,7 @@ main {
   align-items: center;
   width: 100%;
   max-width: 800px;
-  height: 248px;
+  height: auto;
   padding: 20px;
   margin: 30px auto 0;
   border: 1px solid #e4e4e7;
@@ -162,7 +162,7 @@ main {
 
 .reviews {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 20px;
     margin-top: 60px
 
@@ -354,22 +354,28 @@ main {
   color: #2D3748;
 }
 
-.btn-submit {
-  display: block;
-  width: 100%;
-  padding: 12px;
-  background: #7C3AED;
-  color: #FFFFFF;
-  font-size: 1rem;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background 0.2s;
+.button-container {
+    display: flex;
+    justify-content: center; 
+    margin-top: 20px; 
 }
 
-.btn-submit:hover {
-  background: #5A2EB7;
+.button-container .btn-submit { 
+    font-size: 1.125rem;
+    background-color: #7c3aed;
+    border-radius: 8px;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+    width: 220px;
+    text-align: center; 
 }
+
+.button-container .btn-submit:hover {
+    transform: scaleY(1.05);
+}
+
 
 .rating-input {
   display: flex;
@@ -456,21 +462,6 @@ main {
     }
 }
 
-@media (max-width: 991px) {
-  .stats-reviews {
-    flex-direction: column;
-    height: auto;
-  }
-  .left-panel,
-  .rank-star {
-    width: 100%;
-  }
-  .filter_reviews {
-    flex-direction: column;
-    gap: 10px;
-  }
-}
-
 .review-success {
   color: #38a169;
   background: #e6fffa;
@@ -490,3 +481,98 @@ main {
   text-align: center;
   font-size: 1.1rem;
 }
+
+/* Адаптивность */
+
+@media (max-width: 768px) {
+    main {
+        padding: 0 20px;
+    }
+
+    .reviews-title {
+        font-size: 2rem;
+    }
+
+    .reviews-desc {
+        font-size: 1.2rem;
+    }
+
+    .fairy-img {
+        position: relative; 
+        transform: none; 
+        left: auto;
+        width: 100%;  
+        display: flex;
+        flex-direction: column;
+        align-items: center;        
+    }
+      .fairy-img img {
+        position: static; 
+        width: 80%;
+        max-width: 350px; 
+        height: auto;
+        margin-bottom: 20px; 
+    }
+
+    .stats-reviews {
+        padding: 10px;
+    }
+
+    .left-panel {
+        min-width: auto;
+    }
+
+    .filter_reviews {
+        flex-direction: column;
+    }
+
+    .reviews {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 1441px) {
+    main {
+        padding: 0 120px;
+    }
+
+    .reviews-title {
+        font-size: 4rem;
+    }
+
+    .reviews-desc {
+        font-size: 2rem;
+    }
+
+    .fairy-img {
+        bottom: 20%;
+    }
+
+    .fairy-img img {
+        width: 350px;
+        height: 400px;
+    }
+}
+/* Для экранов 2K */
+@media (min-width: 2560px) {
+    .reviews-title {
+        font-size: 5rem;
+    }
+
+    .reviews-desc {
+        font-size: 2.5rem;
+    }
+
+    .fairy-img {
+        bottom: 25%;
+    }
+
+    .fairy-img img {
+        width: 450px; 
+        height: 500px;
+    }
+ .reviews {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+

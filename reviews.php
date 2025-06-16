@@ -169,12 +169,12 @@ $displayCount = $totalReviews >= 199
     : $totalReviews;
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Озывы родителей наших пациентов</title>
+    <title>Отзывы родителей наших маленьких пациентов</title>
     <link rel="stylesheet" href="/assets/css/header.css">
     <link rel="stylesheet" href="/assets/css/reviews_style.css">
     <link rel="stylesheet" href="/assets/css/auth_modal.css">
@@ -382,7 +382,9 @@ $displayCount = $totalReviews >= 199
                     <input type="checkbox" name="show_child_info" value="1">
                     Показывать имя и возраст ребенка в отзыве
                 </label>
+                <div class="button-container">
                 <button type="submit" class="btn-submit">Отправить отзыв</button>
+                </div>
             </form>
         </section>
     </main>
