@@ -56,54 +56,76 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Валидация формы регистрации
+    // AJAX обработчик для формы входа
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(loginForm);
+            
+            fetch('includes/auth_handler.php', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Успешная авторизация
+                    window.location.reload();
+                } else {
+                    // Ошибка авторизации
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+                alert('Произошла ошибка при авторизации');
+            });
+        });
+    }
+    
+    // AJAX обработчик для формы регистрации
     const registerForm = document.getElementById('registerForm');
     if (registerForm) {
         registerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
             const password = document.getElementById('register_password').value;
             const confirmPassword = document.getElementById('confirm_password').value;
             
             if (password !== confirmPassword) {
-                e.preventDefault();
                 alert('Пароли не совпадают!');
+                return;
             }
+            
+            const formData = new FormData(registerForm);
+            
+            fetch('includes/auth_handler.php', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Успешная регистрация
+                    alert(data.message);
+                    window.location.reload();
+                } else {
+                    // Ошибка регистрации
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+                alert('Произошла ошибка при регистрации');
+            });
         });
     }
-    
-    // AJAX отправка форм (опционально)
-    function setupFormAjax(formId) {
-        const form = document.getElementById(formId);
-        if (form) {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const formData = new FormData(form);
-                
-                fetch('includes/auth_handler.php', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // Если успешно, перезагружаем страницу
-                        window.location.reload();
-                    } else {
-                        // Иначе показываем ошибку
-                        alert(data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Ошибка:', error);
-                });
-            });
-        }
-    }
-    
-    // Настраиваем AJAX для форм
-    setupFormAjax('loginForm');
-    setupFormAjax('registerForm');
 });

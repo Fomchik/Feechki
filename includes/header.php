@@ -9,8 +9,17 @@ checkRememberCookie($pdo);
 $isLoggedIn = is_logged_in();
 
 $userAvatar = null;
+$userEmail = null;
 if ($isLoggedIn) {
     $userAvatar = getUserAvatar($_SESSION['user_id'], $pdo);
+    // Получаем email пользователя из базы данных
+    try {
+        $stmt = $pdo->prepare('SELECT email FROM users WHERE id = :id');
+        $stmt->execute(['id' => $_SESSION['user_id']]);
+        $userEmail = $stmt->fetchColumn();
+    } catch (PDOException $e) {
+        error_log("Ошибка получения email: " . $e->getMessage());
+    }
 }
 
 // Проверка активной страницы для подсветки пункта меню
@@ -64,10 +73,9 @@ function isActive($page) {
                                 <div class="user-dropdown__header">
                                     <div class="user-info">
                                         <span class="user-name">
-                                            <?= htmlspecialchars($_SESSION['first_name'] ?? '') ?> 
-                                            <?= htmlspecialchars($_SESSION['last_name'] ?? '') ?>
+                                            <?= htmlspecialchars($_SESSION['username'] ?? '') ?>
                                         </span>
-                                        <span class="user-email"><?= htmlspecialchars($_SESSION['email'] ?? '') ?></span>
+                                        <span class="user-email"><?= htmlspecialchars($userEmail ?? '') ?></span>
                                     </div>
                                 </div>
                                 <div class="user-dropdown__menu">

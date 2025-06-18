@@ -68,7 +68,7 @@ if ($isLoggedIn) {
 
 
 $ratingFilter = isset($_GET['rating']) && is_numeric($_GET['rating']) ? (int)$_GET['rating'] : null;
-$serviceFilter  = isset($_GET['service']) && !empty($_GET['service']) ? $_GET['service'] : null;
+$serviceFilter  = isset($_GET['service']) && is_numeric($_GET['service']) ? (int)$_GET['service'] : null;
 
 $where  = "WHERE r.status = 'approved' AND r.rating BETWEEN 1 AND 5";
 $params = [];
@@ -118,6 +118,10 @@ while ($row = $stmtRatings->fetch(PDO::FETCH_ASSOC)) {
     $ratingCounts[(int)$row['rating']] = (int)$row['count'];
 }
 $totalReviews = array_sum($ratingCounts);
+
+// Получаем общее количество отзывов без учета фильтрации
+$sqlAllCount = "SELECT COUNT(*) FROM reviews WHERE status = 'approved' AND rating BETWEEN 1 AND 5";
+$totalAllReviews = (int)$pdo->query($sqlAllCount)->fetchColumn();
 
 // Пагинация
 $reviewsPerPage = 6;
@@ -188,7 +192,7 @@ $displayCount = $totalReviews >= 199
         <section class="reviews-section">
             <div class="reviews-header">
                 <h1 class="reviews-title">Озывы о нашей <br> клинике</h1>
-                <p class="reviews-desc">Более <?php echo htmlspecialchars($displayCount); ?> историй от родителей <br> наших маленьких пациентов</p>
+                <p class="reviews-desc">Более <?php echo htmlspecialchars($totalAllReviews); ?> историй от родителей <br> наших маленьких пациентов</p>
             </div>
             <div class="fairy-img">
                 <img src="/assets/images/fairy_2.png" alt="fairy_boy">
@@ -212,9 +216,13 @@ $displayCount = $totalReviews >= 199
                         </select>
                         <select name="service" id="service-filter">
                             <option value="">Выберите услугу</option>
-                            <?php foreach ($services as $service): ?>
-                                <option value="<?php echo htmlspecialchars($service); ?>" <?php echo $serviceFilter === $service ? 'selected' : ''; ?>>
-                                    <?php echo htmlspecialchars($service); ?>
+                            <?php
+                            // Получаем все услуги из таблицы services
+                            $stmtAllServices = $pdo->query("SELECT id, name FROM services ORDER BY name");
+                            $allServices = $stmtAllServices->fetchAll(PDO::FETCH_ASSOC);
+                            foreach ($allServices as $service): ?>
+                                <option value="<?php echo $service['id']; ?>" <?php echo $serviceFilter === (int)$service['id'] ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($service['name']); ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>

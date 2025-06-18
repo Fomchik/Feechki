@@ -6,7 +6,7 @@
            <span class="close">&times;</span>
        </div>
        <div class="modal-body">
-           <form id= "loginForm" method="post" action="includes/auth_handler.php">
+           <form id= "loginForm" method="post" action="/includes/auth_handler.php">
                <input type='hidden' name='action' value='login'>
                <div class="form-group">
                    <label for="login">Ваш email или логин</label>
@@ -41,7 +41,7 @@
            <span class="close">&times;</span>
        </div>
        <div class="modal-body">
-           <form id="registerForm" method="post" action="auth_handler.php">
+           <form id="registerForm" method="post" action="/includes/auth_handler.php">
                <input type="hidden" name="action" value="register">
        <div class="form-group">
            <label for="username">Ваш логин</label>

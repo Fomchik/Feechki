@@ -43,6 +43,7 @@ main {
   bottom: 30%;
   display: flex;
   justify-content: space-between;
+  z-index: -1;
 }
 
 .fairy-img img {

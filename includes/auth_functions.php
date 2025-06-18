@@ -133,7 +133,7 @@ function loginUser($login, $password, $remember, $pdo) {
             setcookie('remember_user', $user['id'] . ':' . $token, time() + 60*60*24*30, '/', '', false, true);
         }
         
-        return ['success' => true, 'message' => 'Авторизация успешна'];
+        return ['success' => true];
         
     } catch (PDOException $e) {
         // Логирование ошибки
