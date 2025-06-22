@@ -13,6 +13,36 @@ if (!is_logged_in()) {
 
 $user_id = $_SESSION['user_id'];
 
+// СНАЧАЛА: обработка обновления личных данных
+if (isset($_POST['action']) && $_POST['action'] === 'update_personal') {
+    header('Content-Type: application/json');
+    $fullname = trim($_POST['fullname'] ?? '');
+    $phone = trim($_POST['phone'] ?? '');
+    $birth_date = trim($_POST['birth_date'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    if (!$fullname || !$email) {
+        echo json_encode(['success' => false, 'message' => 'Имя и email обязательны']);
+        exit;
+    }
+    // Обновляем email в users
+    $stmt = $pdo->prepare('UPDATE users SET email = ? WHERE id = ?');
+    $stmt->execute([$email, $user_id]);
+    // Проверяем, есть ли запись в user_details
+    $stmt = $pdo->prepare('SELECT id FROM user_details WHERE user_id = ?');
+    $stmt->execute([$user_id]);
+    if ($stmt->fetch()) {
+        // Обновляем
+        $stmt = $pdo->prepare('UPDATE user_details SET full_name = ?, phone = ?, birth_date = ? WHERE user_id = ?');
+        $stmt->execute([$fullname, $phone, $birth_date ?: null, $user_id]);
+    } else {
+        // Вставляем
+        $stmt = $pdo->prepare('INSERT INTO user_details (user_id, full_name, phone, birth_date) VALUES (?, ?, ?, ?)');
+        $stmt->execute([$user_id, $fullname, $phone, $birth_date ?: null]);
+    }
+    echo json_encode(['success' => true]);
+    exit;
+}
+
 // Валидация и сбор данных
 $display_name = trim($_POST['display_name'] ?? '');
 $child_name = trim($_POST['child_name'] ?? '');

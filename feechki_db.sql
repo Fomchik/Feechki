@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Июн 14 2025 г., 12:25
+-- Время создания: Июн 22 2025 г., 15:06
 -- Версия сервера: 5.7.44
 -- Версия PHP: 7.4.33
 
@@ -20,6 +20,59 @@ SET time_zone = "+00:00";
 --
 -- База данных: `feechki_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `appointments`
+--
+
+CREATE TABLE `appointments` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `doctor_id` int(11) NOT NULL,
+  `service_id` int(10) UNSIGNED DEFAULT NULL,
+  `appointment_date` date NOT NULL,
+  `appointment_time` time NOT NULL,
+  `status` enum('scheduled','completed','cancelled') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'scheduled',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `appointments`
+--
+
+INSERT INTO `appointments` (`id`, `user_id`, `doctor_id`, `service_id`, `appointment_date`, `appointment_time`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 2, '2025-07-12', '10:00:00', 'scheduled', '2025-06-15 14:30:00', NULL),
+(2, 2, 1, 1, '2025-07-07', '14:30:00', 'scheduled', '2025-06-14 09:15:00', NULL),
+(3, 3, 2, 8, '2025-06-30', '11:30:00', 'scheduled', '2025-06-12 16:45:00', NULL),
+(4, 4, 3, 3, '2025-06-25', '09:00:00', 'scheduled', '2025-06-10 13:20:00', NULL),
+(5, 5, 4, 5, '2025-07-15', '15:45:00', 'scheduled', '2025-06-18 10:30:00', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `doctors`
+--
+
+CREATE TABLE `doctors` (
+  `id` int(11) NOT NULL,
+  `full_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `specialization` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` enum('active','inactive') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `doctors`
+--
+
+INSERT INTO `doctors` (`id`, `full_name`, `specialization`, `avatar`, `status`) VALUES
+(1, 'Чистякова Мия Львовна', 'Детский стоматолог', 'doctor_chistjakova.jpg', 'active'),
+(2, 'Боброва Алиса Дмитриевна', 'Ортодонт', 'doctor_bobrova.jpg', 'active'),
+(3, 'Соколов Иван Артемович', 'Детский стоматолог-хирург', 'doctor_sokolov.jpg', 'active'),
+(4, 'Ковалева Елена Сергеевна', 'Детский стоматолог', 'doctor_kovaleva.jpg', 'active');
 
 -- --------------------------------------------------------
 
@@ -66,7 +119,12 @@ INSERT INTO `reviews` (`id`, `user_id`, `rating`, `review_text`, `child_name`, `
 (15, 15, 5, 'Делали реминерализацию эмали дочке. Врач так здорово всё объяснила, что Маша даже не поняла, что это лечение. Ей подарили наклейку и рассказали, как ухаживать за зубками. Теперь она всем хвастается, какие у неё крепкие зубы!', 'Маша', 4, 'Мама', 1, 'Наталья Семенова', 'approved', '2025-06-13 18:25:31', NULL, 9, 'Реминерализация эмали'),
 (16, 16, 5, 'Лечили пульпит сыну. Очень переживали, но врач всё сделал безболезненно, с анестезией. Саша даже не понял, что было что-то серьёзное. Теперь зуб в порядке, а сын с радостью ходит на проверки. Спасибо за профессионализм!', 'Саша', 10, 'Папа', 1, 'Павел Григорьев', 'approved', '2025-06-13 19:40:54', NULL, 7, 'Лечение пульпита'),
 (17, 17, 4, 'Удаляли зубной камень дочке. Процедура прошла быстро, но Кира немного нервничала из-за звука инструментов. Врач постарался её успокоить, показав мультики. Всё хорошо, но хотелось бы чуть больше внимания к ребёнку.', 'Кира', 11, 'Мама', 1, 'Светлана Федорова', 'approved', '2025-06-13 20:55:17', NULL, 10, 'Удаление зубного камня'),
-(18, 18, 5, 'Делали эстетическую реставрацию переднего зуба сыну после того, как он его сломал на тренировке. Результат потрясающий — зуб как родной! Никита теперь улыбается во весь рот. Врач — настоящий мастер, спасибо огромное!', 'Никита', 13, 'Папа', 1, 'Михаил Зайцев', 'approved', '2025-06-13 22:10:40', NULL, 12, 'Эстетическая реставрация');
+(18, 18, 5, 'Делали эстетическую реставрацию переднего зуба сыну после того, как он его сломал на тренировке. Результат потрясающий — зуб как родной! Никита теперь улыбается во весь рот. Врач — настоящий мастер, спасибо огромное!', 'Никита', 13, 'Папа', 1, 'Михаил Зайцев', 'approved', '2025-06-13 22:10:40', NULL, 12, 'Эстетическая реставрация'),
+(19, 19, 4, 'У сына начали появляться проблемы с прикусом, обратились в вашу клинику на консультацию.\r\nВрач всё подробно объяснил, сделали снимки, подобрали план лечения. Сейчас носим съёмную пластинку, уже видны первые результаты. Очень внимательное отношение. Спасибо за профессионализм.', 'Александр', 15, 'Папа', 0, 'Сан Саныч', 'approved', '2025-06-14 15:09:36', NULL, 15, 'Коррекция прикуса'),
+(20, 20, 5, 'Вылечили кариеса и спустя какое-то время возник нарыв, обратились в клинику, как оказалось это пульпит, процедура шла 40 минут, все быстро и качественно', NULL, NULL, 'Папа', 0, 'Егор', 'approved', '2025-06-14 15:22:11', NULL, 7, 'Лечение пульпита'),
+(21, 20, 5, 'Хорошая клиника', 'Марк', 12, 'Папа', 0, 'Леонид', 'approved', '2025-06-14 15:41:35', NULL, 2, 'Профилактический осмотр'),
+(22, 23, 3, 'Удалили зуб, все нормально', 'Влад', 12, 'Папа', 1, 'Антон П', 'pending', '2025-06-18 06:24:37', NULL, 1, 'Удаление молочных зубов'),
+(23, 23, 4, 'Приводил сына удалять зуб в эту клинику, теперь привел дочь, ставить брекеты', 'Лиза', 10, 'Папа', 1, 'Антон П', 'pending', '2025-06-18 06:30:07', NULL, 8, 'Установка брекетов');
 
 -- --------------------------------------------------------
 
@@ -138,11 +196,95 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `avatar_color`, `rem
 (15, 'Наталья_Семенова', 'natalia.semenova@gmail.com', '$2y$12$randomHash15', '#007aff', NULL, '2025-06-12 18:10:31'),
 (16, 'Павел_Григорьев', 'pavel.grigoryev@mail.ru', '$2y$12$randomHash16', '#34c759', NULL, '2025-06-12 19:25:54'),
 (17, 'Светлана_Федорова', 'svetlana.fedorova@gmail.com', '$2y$12$randomHash17', '#ff9500', NULL, '2025-06-12 20:40:17'),
-(18, 'Михаил_Зайцев', 'mikhail.zaytsev@mail.ru', '$2y$12$randomHash18', '#5856d6', NULL, '2025-06-12 21:55:40');
+(18, 'Михаил_Зайцев', 'mikhail.zaytsev@mail.ru', '$2y$12$randomHash18', '#5856d6', NULL, '2025-06-12 21:55:40'),
+(19, 'leo528', 'leoscachkov@gmail.com', '$2y$12$xupyk3yw04Z5TFv1h0c3YewwbsK85CDau5k0scEu71BKkP.DCLCoy', '#ff3b30', NULL, '2025-06-14 13:39:18'),
+(20, 'egor', 'egor@gmail.com', '$2y$12$OGPypDieJHk2tykj6caaQux3kkDD4vm9n7agaDBrwAJMqB219sANO', '#6c4ade', NULL, '2025-06-14 15:18:25'),
+(21, 'ilya', 'ilyatest@gmail.com', '$2y$12$syixQyfzY5chVMtqKRn10OWFxkwI0.5pbM4KRW7PYUJMQV3Olk1ve', '#5ac8fa', NULL, '2025-06-18 04:47:29'),
+(22, 'leo636363', 'leo36@gmail.com', '$2y$12$H6fqkyf6OKgYl0JTPwE.xuta8WzeEK6uCsgwT0/92nUkxZggkkXBm', '#6c4ade', NULL, '2025-06-18 04:57:01'),
+(23, 'devtols', 'devtols@gmail.com', '$2y$12$aCckuF3ZvoR3XMzLLYTckO8BWhdbN6IS5MAiloCTyeIujxZMlWBya', '#4cd964', NULL, '2025-06-18 05:01:06'),
+(24, 'kyl', 'lyj@gmail.com', '$2y$12$vJ3ss4i5mW7hf8K7DH3v6uMlr8BgZQ0l1JV.Lua5x5bWMGsGa/Ndu', '#6c4ade', NULL, '2025-06-18 05:41:01'),
+(25, 'developer', 'mode@gmail.com', '$2y$12$TsrRLSb0Tcw5lcZwyZvfv.71nUA3VQhsnyUKkF/ujFvRJw4omNGDi', '#6c4ade', NULL, '2025-06-18 06:15:03'),
+(26, 'deva', 'veda@gmail.com', '$2y$12$r0UYBNDdbIEQ.lrjeqi57.p3sBnGUKqnKRLRPtZHMStOPlBwcbH12', '#6c4ade', NULL, '2025-06-18 06:17:14');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `user_details`
+--
+
+CREATE TABLE `user_details` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `full_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `birth_date` date DEFAULT NULL,
+  `gender` enum('male','female','other') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `user_details`
+--
+
+INSERT INTO `user_details` (`id`, `user_id`, `full_name`, `phone`, `birth_date`, `gender`, `address`, `updated_at`) VALUES
+(1, 1, 'Иван Смирнов', '+7 (912) 345-67-89', '1990-05-18', 'male', 'г. Москва, ул. Ленина, д. 15, кв. 27', '2025-06-01 21:46:04'),
+(2, 2, 'Анна Петрова', '+7 (925) 123-45-67', '1985-07-21', 'female', 'г. Москва, ул. Пушкина, д. 10, кв. 15', '2025-06-07 16:01:06'),
+(3, 3, 'Елена Соколова', '+7 (929) 765-43-21', '1988-12-05', 'female', 'г. Москва, Проспект Мира, д. 78, кв. 45', '2025-06-10 11:53:47'),
+(4, 4, 'Сергей Иванов', '+7 (915) 555-44-33', '1982-03-15', 'male', 'г. Москва, ул. Жукова, д. 25, кв. 12', '2025-06-10 11:53:47'),
+(5, 5, 'Анастасия Рокотова', '+7 (926) 987-65-43', '1992-11-30', 'female', 'г. Москва, ул. Гагарина, д. 8, кв. 93', '2025-06-11 18:48:01');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `visit_history`
+--
+
+CREATE TABLE `visit_history` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `doctor_id` int(11) NOT NULL,
+  `service_id` int(10) UNSIGNED DEFAULT NULL,
+  `visit_date` date NOT NULL,
+  `visit_time` time NOT NULL,
+  `notes` text COLLATE utf8mb4_unicode_ci,
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `visit_history`
+--
+
+INSERT INTO `visit_history` (`id`, `user_id`, `doctor_id`, `service_id`, `visit_date`, `visit_time`, `notes`, `created_at`) VALUES
+(1, 1, 1, 2, '2025-06-05', '11:30:00', 'Профилактический осмотр. Состояние зубов хорошее.', '2025-06-05 12:30:00'),
+(2, 2, 1, 1, '2025-05-25', '10:00:00', 'Удаление молочного зуба прошло без осложнений.', '2025-05-25 10:45:00'),
+(3, 3, 3, 2, '2025-06-01', '14:15:00', 'Проведен профилактический осмотр. Обнаружен начальный кариес на 55 зубе.', '2025-06-01 15:00:00'),
+(4, 4, 2, 1, '2025-05-20', '09:00:00', 'Удаление молочного зуба 74. Процедура прошла успешно.', '2025-05-20 09:30:00'),
+(5, 5, 1, 3, '2025-05-15', '16:30:00', 'Лечение кариеса на зубе 54. Установлена пломба.', '2025-05-15 17:15:00'),
+(6, 1, 3, 6, '2025-04-10', '13:45:00', 'Проведено фторирование зубов.', '2025-04-10 14:30:00'),
+(7, 2, 4, 5, '2025-03-22', '11:30:00', 'Выполнена профессиональная чистка зубов.', '2025-03-22 12:15:00'),
+(8, 3, 2, 3, '2025-04-05', '10:00:00', 'Лечение кариеса на зубах 84 и 85.', '2025-04-05 11:00:00'),
+(9, 4, 1, 9, '2025-02-15', '15:00:00', 'Проведена реминерализация эмали.', '2025-02-15 15:45:00'),
+(10, 5, 3, 4, '2025-01-20', '09:30:00', 'Выполнена герметизация фиссур.', '2025-01-20 10:15:00');
 
 --
 -- Индексы сохранённых таблиц
 --
+
+--
+-- Индексы таблицы `appointments`
+--
+ALTER TABLE `appointments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `doctor_id` (`doctor_id`),
+  ADD KEY `service_id` (`service_id`);
+
+--
+-- Индексы таблицы `doctors`
+--
+ALTER TABLE `doctors`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `reviews`
@@ -168,14 +310,42 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `email` (`email`);
 
 --
+-- Индексы таблицы `user_details`
+--
+ALTER TABLE `user_details`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `user_id` (`user_id`);
+
+--
+-- Индексы таблицы `visit_history`
+--
+ALTER TABLE `visit_history`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `doctor_id` (`doctor_id`),
+  ADD KEY `service_id` (`service_id`);
+
+--
 -- AUTO_INCREMENT для сохранённых таблиц
 --
+
+--
+-- AUTO_INCREMENT для таблицы `appointments`
+--
+ALTER TABLE `appointments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT для таблицы `doctors`
+--
+ALTER TABLE `doctors`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT для таблицы `services`
@@ -187,17 +357,51 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT для таблицы `user_details`
+--
+ALTER TABLE `user_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT для таблицы `visit_history`
+--
+ALTER TABLE `visit_history`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
 
 --
+-- Ограничения внешнего ключа таблицы `appointments`
+--
+ALTER TABLE `appointments`
+  ADD CONSTRAINT `appointments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `appointments_ibfk_2` FOREIGN KEY (`doctor_id`) REFERENCES `doctors` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `appointments_ibfk_3` FOREIGN KEY (`service_id`) REFERENCES `services` (`id`) ON DELETE SET NULL;
+
+--
 -- Ограничения внешнего ключа таблицы `reviews`
 --
 ALTER TABLE `reviews`
   ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `user_details`
+--
+ALTER TABLE `user_details`
+  ADD CONSTRAINT `user_details_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `visit_history`
+--
+ALTER TABLE `visit_history`
+  ADD CONSTRAINT `visit_history_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `visit_history_ibfk_2` FOREIGN KEY (`doctor_id`) REFERENCES `doctors` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `visit_history_ibfk_3` FOREIGN KEY (`service_id`) REFERENCES `services` (`id`) ON DELETE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

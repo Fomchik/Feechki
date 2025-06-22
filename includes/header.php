@@ -80,8 +80,8 @@ function isActive($page) {
                                 </div>
                                 <div class="user-dropdown__menu">
                                     <a href="/profile.php">Профиль</a>
-                                    <a href="/records.php">Записи</a>
-                                    <a href="/settings.php">Настройки</a>
+                                    <a href="/profile.php">Записи</a>
+                                    <a href="/profile.php">Настройки</a>
                                     <a href="/includes/logout.php" class="logout-link">Выход</a>
                                 </div>
                             </div>
